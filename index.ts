@@ -22,7 +22,7 @@ export function authorize(organization: string) : Function {
                     'access_token': socket.request._query.token
                 },
                 headers: {
-                    'User-Agent': 'postman-mock-http-proxy',
+                    'User-Agent': 'user-agent',
                 }
             }, (err: any, res: any, body: string) => {
                 if(err){
