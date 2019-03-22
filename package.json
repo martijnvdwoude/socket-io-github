@@ -1,5 +1,5 @@
 {
-  "name": "socket-io-github",
+  "name": "socketio-github-org",
   "version": "1.0.0",
   "description": "GitHub organization authorization for Socket.io",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/martijnvdwoude/socket-io-github.git"
+    "url": "git+https://github.com/martijnvdwoude/socketio-github-org.git"
   },
   "keywords": [
     "socket.io",
@@ -26,9 +26,9 @@
   "author": "Martijn van der Woude <martijnvdwoude@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/martijnvdwoude/socket-io-github/issues"
+    "url": "https://github.com/martijnvdwoude/socketio-github-org/issues"
   },
-  "homepage": "https://github.com/martijnvdwoude/socket-io-github#readme",
+  "homepage": "https://github.com/martijnvdwoude/socketio-github-org#readme",
   "devDependencies": {
     "@types/request": "^2.48.1",
     "typescript": "^3.3.4000"
