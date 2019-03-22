@@ -1,6 +1,6 @@
 {
   "name": "socketio-github-org",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "GitHub organization authorization for Socket.io",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,10 +8,6 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@types/caseless": "*",
-    "@types/form-data": "*",
-    "@types/node": "*",
-    "@types/tough-cookie": "*",
     "request": "^2.88.0"
   },
   "repository": {
@@ -21,7 +17,8 @@
   "keywords": [
     "socket.io",
     "github",
-    "organization"
+    "organization",
+    "authorization"
   ],
   "author": "Martijn van der Woude <martijnvdwoude@gmail.com>",
   "license": "ISC",
