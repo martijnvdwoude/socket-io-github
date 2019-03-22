@@ -1,20 +1,26 @@
 import * as request from 'request'
 
 class AuthorizationError extends Error {
-    code: string | undefined;
+    
+    name: string = "AuthorizationError"
+    code: string
 
-    constructor(code?: string, message?: string) {
-        super(message)
+    constructor(code: string, message?: string) {
+        super(code)
         this.code = code
-        Object.setPrototypeOf(this, AuthorizationError.prototype);
+        this.message = message === undefined ? "" : message
+
+        this.stack = (<any>new Error()).stack
+        Object.setPrototypeOf(this, AuthorizationError.prototype)
     }
+
 }
 
 export function authorize(organization: string) : Function {
     return (socket: { request: { _query: { token: undefined; } | undefined; }; }, next: { (arg0: AuthorizationError): void; (arg0: AuthorizationError): void; (): void; (arg0: AuthorizationError): void; (arg0: AuthorizationError): void; (arg0: AuthorizationError): void; }) => {
         if(socket.request._query === undefined ||
             socket.request._query.token === undefined){
-                next(new AuthorizationError('failed_authorization', 'No Github access token provided'))
+                next(new AuthorizationError('missing_token'))
         } else {
             request({
                 url: 'https://api.github.com/user/orgs',
@@ -22,7 +28,7 @@ export function authorize(organization: string) : Function {
                     'access_token': socket.request._query.token
                 },
                 headers: {
-                    'User-Agent': 'user-agent',
+                    'User-Agent': 'ua',
                 }
             }, (err: any, res: any, body: string) => {
                 if(err){
@@ -39,13 +45,13 @@ export function authorize(organization: string) : Function {
                             if(isMemberOfOrganization){
                                 next()
                             } else {
-                                next(new AuthorizationError('not_a_member', 'You are not a member of the required organization'))
+                                next(new AuthorizationError('not_a_member'))
                             }
                         } else {
-                            next(new AuthorizationError('failed_authorization', parsedBody.message ? parsedBody.message : 'Something went wrong with authorization'))
+                            next(new AuthorizationError('failed_authorization', parsedBody.message))
                         }
                     } else {
-                        next(new AuthorizationError('failed_authorization', 'Something went wrong with authorization'))
+                        next(new AuthorizationError('failed_authorization'))
                     }
                 }
             })
