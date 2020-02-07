@@ -24,10 +24,8 @@ export function authorize(organization: string) : Function {
         } else {
             request({
                 url: 'https://api.github.com/user/orgs',
-                qs: {
-                    'access_token': socket.request._query.token
-                },
                 headers: {
+                    'Authorization': 'token ' + socket.request._query.token,
                     'User-Agent': 'ua',
                 }
             }, (err: any, res: any, body: string) => {
